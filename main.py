@@ -13,4 +13,9 @@
 # else:
 #     print("error")
 
-
+def count_unique_elements(imput_list):
+    unique_elements = set(imput_list)
+    return len(unique_elements)
+imput_list = [11,11,12,12,11,21, 2, 3 ,4 ,5 ,6 ,7]
+unique_elements = count_unique_elements(imput_list)
+print("Количество уникальных символов", unique_elements)
