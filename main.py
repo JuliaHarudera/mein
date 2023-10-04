@@ -40,22 +40,42 @@
 #     print("не все слова словаря есть уникальынми")
 
 # Task 4
-def find_common_friends(friendships, user1, user2):
-    if user1 in friendships and user2 in friendships:
-        common_friends = friendships[user1].intersection(friendships[user2])
-        return common_friends
-    else:
-        return set()
-friendships = {
-    "user1": {"user2", "user3", "user4"},
-    "user2": {"user1", "user3"},
-    "user3": {"user1", "user2", "user4"},
-    "user4": {"user1", "user3"}
-}
-user1 = "user1"
-user2 = "user2"
-common_friends = find_common_friends(friendships, user1, user2)
-if common_friends:
-    print(f"Спільні друзі користувачів {user1} і {user2}: {', '.join(common_friends)}")
-else:
-    print(f"У користувачів {user1} і {user2} немає спільних друзів.")
+# def find_common_friends(friendships, user1, user2):
+#     if user1 in friendships and user2 in friendships:
+#         common_friends = friendships[user1].intersection(friendships[user2])
+#         return common_friends
+#     else:
+#         return set()
+# friendships = {
+#     "user1": {"user2", "user3", "user4"},
+#     "user2": {"user1", "user3"},
+#     "user3": {"user1", "user2", "user4"},
+#     "user4": {"user1", "user3"}
+# }
+# user1 = "user1"
+# user2 = "user2"
+# common_friends = find_common_friends(friendships, user1, user2)
+# if common_friends:
+#     print(f"совместные друзья {user1} і {user2}: {', '.join(common_friends)}")
+# else:
+#     print(f"У пользователя {user1} і {user2} нет совместных друзей.")
+
+
+# Task 5
+# def long_common_words(str1, str2):
+#     words1 = set(str1.split())
+#     words2 = set(str2.split())
+#     common_words = words1.intersection(words2)
+#     long_words = ""
+#     for word in words1:
+#         if len(word) > len(long_words):
+#             long_words = word
+#     return long_words
+# string1 = "Тут надо ввести стору для сровнения"
+# string2 = "Тут тоже надо ввести строку для стовнения"
+# result = long_common_words(string1, string2)
+# if result:
+#     print(f"Самое длиное слово которе совпало: {result}")
+# else:
+#     print("нету совместных слов")
+
