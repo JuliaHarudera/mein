@@ -1,47 +1,50 @@
-
-def calculate_expenses_by_category(hw_10_test):
-    expenses_by_category = {}
-    with open("hw_10_test", 'w', encoding='utf-8') as f:
-        for line in f:
-            _, _, sum_str, category = line.strip().split()
-            sum_value = float(sum_str)
-            if category in expenses_by_category:
-                expenses_by_category[category] += sum_value
-            else:
-                expenses_by_category[category] = sum_value
-    return expenses_by_category
+def parser(numbers: str) -> list:
+    return [list(num) for num in numbers.split(",")]
 
 
-def calculate_expenses_of_family_members(hw_10_test):
-    expenses_of_family_members = {}
-    with open(hw_10_test, 'r', encoding='utf-8') as f:
-        for line in f:
-            _, name, sum_str = line.strip().split()
-            sum_value = float(sum_str)
-            if name in expenses_of_family_members:
-                expenses_of_family_members[name] += sum_value
-            else:
-                expenses_of_family_members[name] = sum_value
-    return expenses_of_family_members
+def is_arithmetic_sequence(numbers: list) -> bool:
+    n = len(numbers)
+    if n < 2:
+        return False
+    diff = numbers[1] - numbers[0]
+    return all(numbers[i] - numbers[i - 1] == diff for i in range(2, n))
 
 
-def main():
-    file_name = "hw_10_test.txt"
+def is_geometric_sequence(numbers: list) -> bool:
+    n = len(numbers)
+    if n < 2:
+        return False
+    ratio = numbers[1]/numbers[0]
+    return all(numbers[i]/numbers[i - 1] == ratio for i in range(2, n))
 
-    expenses_by_category = calculate_expenses_by_category(file_name)
-    print("Загальна сума витрат по категоріях товарів:")
-    for category, sum_value in expenses_by_category.items():
-        print(f"{category}: {sum_value}")
 
-    expenses_of_family_members = calculate_expenses_of_family_members(file_name)
-    enter = input("Введіть ім'я члена сім'ї: ")
-    if enter in expenses_of_family_members:
-        amount_of_expenses = expenses_of_family_members[enter]
-        number_of_purchases = len([line for line in open(file_name, 'r', encoding='utf-8') if enter in line])
-        print(f"{enter} витратив(ла) {amount_of_expenses} гривень на {number_of_purchases} покупок.")
+def next_arithmetic_item(numbers: list) -> int:
+    diff = numbers[1] - numbers[0]
+    return numbers[-1] + diff
+
+
+def next_geometric_item(numbers: list) -> int:
+    ratio = numbers[1] / numbers[0]
+    return int(numbers[-1] * ratio)
+
+
+def get_next_item(numbers: list):
+    if len(numbers) > 2:
+        if is_arithmetic_sequence(numbers):
+            return next_arithmetic_item(numbers)
+
+        if is_geometric_sequence(numbers):
+            return next_geometric_item(numbers)
+
+    return None
+
+
+if __name__ == '__main__':
+    numbers = input('Введите последовательность чисел через запятую: ')
+    numbers = parser(numbers)
+    next_item = get_next_item(numbers)
+
+    if next_item is not None:
+        print("Следующий член последовательности:", next_item)
     else:
-        print(f"{enter} не знайдено в списку членів сім'ї.")
-
-
-if __name__ == "__main__":
-    main()
+        print("Не удалось определить правило для генерации последовательности.")
